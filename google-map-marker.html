@@ -248,6 +248,15 @@ child of `google-map`.
         type: Boolean,
         value: false,
         observer: '_openChanged'
+      },
+
+      /**
+       * Specifies marker's opacity
+       */
+      opacity: {
+        type: Number,
+        value: 1.0,
+        observer: '_opacityChanged'
       }
     },
 
@@ -345,6 +354,12 @@ child of `google-map`.
       }
     },
 
+    _opacityChanged: function() {
+      if(this.marker) {
+        this.marker.setOpacity(this.opacity);
+      }
+    },
+
     _mapChanged: function() {
       // Marker will be rebuilt, so disconnect existing one from old map and listeners.
       if (this.marker) {
@@ -416,7 +431,8 @@ child of `google-map`.
         draggable: this.draggable,
         visible: !this.hidden,
         icon: this.icon,
-        zIndex: this.zIndex
+        zIndex: this.zIndex,
+        opacity: this.opacity
       });
       this._contentChanged();
       this._clickEventsChanged();
@@ -455,6 +471,9 @@ child of `google-map`.
           break;
         case 'title':
           this.marker.setTitle(this.title);
+          break;
+        case 'opacity':
+          this.marker.setOpacity(this.opacity);
           break;
       }
     }

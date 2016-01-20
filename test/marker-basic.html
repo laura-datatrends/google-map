@@ -11,7 +11,7 @@
 <body>
 
   <google-map id="map1" latitude="37.77493" longitude="-122.41942">
-    <google-map-marker latitude="37.779" longitude="-122.3892"></google-map-marker>
+    <google-map-marker latitude="37.779" longitude="-122.3892" opacity="0.5"></google-map-marker>
     <google-map-marker id="marker2" latitude="37.777" longitude="-122.38911" drag-events></google-map-marker>
   </google-map>
 
@@ -43,7 +43,8 @@ suite('markers', function() {
     assert.isNull(markerEl.info);
     assert.equal(markerEl.zIndex, 0);
     assert.equal(markerEl.latitude, 37.779);
-    assert.equal(markerEl.longitude, -122.3892);
+    assert.equal(markerEl.longitude, -122.3892)
+    assert.equal(markerEl.opacity, 0.5);
     assert.isFalse(markerEl.open);
     assert.isNull(markerEl.offsetParent,
                   'google-map-marker should be display: none');
@@ -55,6 +56,7 @@ suite('markers', function() {
       markerEl.latitude = 37.77493;
       markerEl.longitude = -122.41942;
       markerEl.zIndex = 1;
+      markerEl.opacity = 0.1;
       assert.equal(
           markerEl.map, map.map, "marker's map is not the google-map's");
 
@@ -62,6 +64,7 @@ suite('markers', function() {
         assert.equal(markerEl.marker.getPosition().lat(), markerEl.latitude);
         assert.equal(markerEl.marker.getPosition().lng(), markerEl.longitude);
         assert.equal(markerEl.marker.getZIndex(), markerEl.zIndex);
+        assert.equal(markerEl.marker.getOpacity(), markerEl.opacity);
 
         markerEl.icon = 'https://www.google.com/images/srpr/logo11w.png';
         flush(function() {
