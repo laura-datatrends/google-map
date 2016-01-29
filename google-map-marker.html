@@ -419,7 +419,9 @@ child of `google-map`.
           this.fire('google-map-marker-open');
         } else {
           this.info.close();
-          this.appendChild(this.infoNode);
+          if(this.infoNode) {
+            this.appendChild(this.infoNode);
+          }
           this.fire('google-map-marker-close');
         }
       }
