@@ -257,6 +257,10 @@ child of `google-map`.
         type: Number,
         value: 1.0,
         observer: '_opacityChanged'
+      },
+
+      infoNode: {
+        type: Object
       }
     },
 
@@ -409,10 +413,13 @@ child of `google-map`.
     _openChanged: function() {
       if (this.info) {
         if (this.open) {
+          this.infoNode = this.firstElementChild;
+          this.info.setContent(this.infoNode);
           this.info.open(this.map, this.marker);
           this.fire('google-map-marker-open');
         } else {
           this.info.close();
+          this.appendChild(this.infoNode);
           this.fire('google-map-marker-close');
         }
       }
